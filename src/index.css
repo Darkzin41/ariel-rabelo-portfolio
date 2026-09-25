@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Gloock&family=JetBrains+Mono:wght@400;500&display=swap');
+@import 'tailwindcss';
+
+/* ─── Design Tokens ─────────────────────────────────────────── */
+:root {
+  --bg:              #08090C;
+  --surface:         #101217;
+  --surface-el:      #151820;
+  --text-primary:    #F5F6F8;
+  --text-secondary:  #9CA3AF;
+  --border:          rgba(255,255,255,0.08);
+  --border-hover:    rgba(255,255,255,0.16);
+
+  --accent:          #3B82F6;
+  --accent-soft:     rgba(59,130,246,0.12);
+  --accent-glow:     rgba(59,130,246,0.28);
+  --accent-rgb:      59,130,246;
+
+  --font-sans:  'Geist', system-ui, sans-serif;
+  --font-serif: 'Gloock', Georgia, serif;
+  --font-mono:  'JetBrains Mono', monospace;
+
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-full: 9999px;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:   cubic-bezier(0.4, 0, 0.2, 1);
+
+  --page-gutter: 24px;
+  --type-h1: clamp(36px, 5.5vw, 76px);
+  --type-h2: clamp(32px, 4vw, 56px);
+  --type-h3: clamp(28px, 3vw, 36px);
+  --type-body-lg: clamp(18px, 1.8vw, 20px);
+  --type-body: 16px;
+  --type-small: 13px;
+  --type-eyebrow: 10px;
+  --section-space: clamp(96px, 10vw, 160px);
+}
+
+/* ─── Accent Themes ─────────────────────────────────────────── */
+[data-accent="blue"] {
+  --accent:       #3B82F6;
+  --accent-soft:  rgba(59,130,246,0.12);
+  --accent-glow:  rgba(59,130,246,0.28);
+  --accent-rgb:   59,130,246;
+}
+[data-accent="violet"] {
+  --accent:       #8B5CF6;
+  --accent-soft:  rgba(139,92,246,0.12);
+  --accent-glow:  rgba(139,92,246,0.28);
+  --accent-rgb:   139,92,246;
+}
+[data-accent="emerald"] {
+  --accent:       #10B981;
+  --accent-soft:  rgba(16,185,129,0.12);
+  --accent-glow:  rgba(16,185,129,0.28);
+  --accent-rgb:   16,185,129;
+}
+[data-accent="amber"] {
+  --accent:       #F59E0B;
+  --accent-soft:  rgba(245,158,11,0.12);
+  --accent-glow:  rgba(245,158,11,0.28);
+  --accent-rgb:   245,158,11;
+}
+
+/* ─── Base ──────────────────────────────────────────────────── */
+/* Tailwind Preflight owns the reset. An unlayered reset here overrides utilities. */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  overflow-x: hidden;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s var(--ease-in-out),
+              color 0.3s var(--ease-in-out);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--text-primary);
+}
+
+/* scrollbar hidden */
+::-webkit-scrollbar { width: 0; height: 0; }
+* { scrollbar-width: none; }
+
+/* ─── Typography Helpers ────────────────────────────────────── */
+.font-serif { font-family: var(--font-serif); }
+.font-mono  { font-family: var(--font-mono); }
+
+.text-accent   { color: var(--accent); }
+.text-secondary { color: var(--text-secondary); }
+
+/* ─── Animated Underline ────────────────────────────────────── */
+.underline-anim {
+  position: relative;
+  text-decoration: none;
+}
+.underline-anim::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s var(--ease-out-expo);
+}
+.underline-anim:hover::after { width: 100%; }
+
+/* ─── Focus Ring ────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ─── Scroll Progress ───────────────────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 1px;
+  background: var(--accent);
+  z-index: 9999;
+  transform-origin: left;
+  transition: transform 0.05s linear;
+}
+
+/* ─── Grain Overlay ─────────────────────────────────────────── */
+.grain-overlay {
+  position: relative;
+  overflow: hidden;
+}
+.grain-overlay::before {
+  content: '';
+  position: absolute;
+  inset: -200%;
+  width: 400%;
+  height: 400%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  animation: grain 0.5s steps(2) infinite;
+  z-index: 0;
+}
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  25%       { transform: translate(-2%, -1%); }
+  50%       { transform: translate(1%, 2%); }
+  75%       { transform: translate(2%, -2%); }
+}
+
+/* ─── Section Background Tokens ─────────────────────────────── */
+:root {
+  --bg-hero:       #07090D;
+  --bg-projects:   #0A0C11;
+  --bg-stack:      #080A0F;
+  --bg-experience: #0B0D12;
+  --bg-contact:    #07090D;
+}
+
+/* ─── Content Width System ──────────────────────────────────── */
+.w-narrow  { max-width: 680px;  margin-inline: auto; }
+.w-medium  { max-width: 900px;  margin-inline: auto; }
+.w-wide    { width: 100%; max-width: 1248px; margin-inline: auto; padding-inline: var(--page-gutter); }
+
+@media (min-width: 768px) {
+  :root { --page-gutter: clamp(24px, 4vw, 80px); }
+}
+
+/* ─── Scan Grid Button ──────────────────────────────────────── */
+.scan-grid-btn {
+  position: relative;
+  overflow: hidden;
+}
+.scan-grid-btn:hover,
+.scan-grid-btn:focus-visible {
+  box-shadow: 0 0 24px var(--accent-glow);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .scan-grid-btn:hover { transform: scale(1.02); }
+  .scan-grid-btn:hover svg { transform: translateX(4px); }
+}
+.scan-grid-btn svg { transition: transform 0.2s var(--ease-out-expo); }
+.scan-grid-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(var(--accent-rgb), 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--accent-rgb), 0.18) 1px, transparent 1px);
+  background-size: 18px 18px;
+  opacity: 0;
+  transition: opacity 0.25s;
+  pointer-events: none;
+  z-index: 0;
+}
+.scan-grid-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.18) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  pointer-events: none;
+  z-index: 0;
+}
+.scan-grid-btn:hover::before {
+  opacity: 1;
+}
+.scan-grid-btn:hover::after {
+  animation: scanLine 0.55s ease-out forwards;
+}
+@keyframes scanLine {
+  from { transform: translateX(-120%); }
+  to   { transform: translateX(120%); }
+}
+
+/* ─── Reduced Motion ────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+  .grain-overlay::before { animation: none; }
+}
