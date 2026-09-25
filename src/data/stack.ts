@@ -156,7 +156,7 @@ export const carouselCards: CarouselCard[] = [
 
   { group: "REACT", color: "#61DAFB", items: ["React"] },
 
-  { group: "NEXT.JS", color: "#F5F6F8", items: ["Next.js"] },
+  { group: "POSTGRESQL", color: "#4169E1", items: ["PostgreSQL"] },
 
   { group: "PHP", color: "#8892BF", items: ["PHP"] },
 
@@ -165,8 +165,6 @@ export const carouselCards: CarouselCard[] = [
   { group: "SQL", color: "#10B981", items: ["SQL"] },
 
   { group: "N8N", color: "#EA4B71", items: ["n8n"] },
-
-  { group: "POWER BI", color: "#F2C811", items: ["Power BI"] },
 
   { group: "GIT / GITHUB", color: "#F05032", items: ["Git", "GitHub"] },
 

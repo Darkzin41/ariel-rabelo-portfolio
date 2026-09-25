@@ -1,7 +1,10 @@
 import assert from "node:assert/strict"
 import test from "node:test"
 import { allProjects, getLocalizedProjects } from "../data/projects.ts"
-import { getLocalizedStackCategories } from "../data/stack.ts"
+import {
+  carouselCards,
+  getLocalizedStackCategories,
+} from "../data/stack.ts"
 import { catalogs } from "./messages.ts"
 import { SUPPORTED_LOCALES, type Locale } from "./core.ts"
 
@@ -98,4 +101,20 @@ test("Python, PHP, and AI are modeled as specialties without inflating every AI 
       false,
     )
   })
+})
+
+test("the home Skills carousel replaces Next.js and Power BI with PostgreSQL only there", () => {
+  const carouselSkills = carouselCards.flatMap((card) => card.items)
+
+  assert.equal(carouselSkills.includes("Next.js"), false)
+  assert.equal(carouselSkills.includes("Power BI"), false)
+  assert.equal(carouselSkills.includes("PostgreSQL"), true)
+
+  const detailedStack = getLocalizedStackCategories("pt-BR").flatMap(
+    (category) => category.items.map((item) => item.name),
+  )
+
+  assert.equal(detailedStack.includes("Next.js"), true)
+  assert.equal(detailedStack.includes("Power BI"), true)
+  assert.equal(detailedStack.includes("PostgreSQL"), false)
 })
