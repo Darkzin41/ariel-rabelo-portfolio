@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --test src/lib/carouselMotion.test.ts src/i18n/core.test.ts src/i18n/content.test.ts",
+    "test": "node --experimental-strip-types --test src/lib/carouselMotion.test.ts src/lib/navigation.test.ts src/i18n/core.test.ts src/i18n/content.test.ts",
     "check": "npm run typecheck && npm test && npm run build",
     "specs:check": "python scripts/validate_specs.py .",
     "format": "oxfmt"
