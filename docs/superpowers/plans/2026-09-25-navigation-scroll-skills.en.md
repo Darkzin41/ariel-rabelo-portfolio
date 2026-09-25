@@ -54,9 +54,9 @@
 
 ### Task 5: Technical memory and final validation
 
-**Files:** Update PT/EN capability, system, testing, history, and session-state documents.
+**Files:** Create `specs/changes/CHG-20260925-navigation-scroll-skills.md` and its `.en.md` pair; update PT/EN capability, system, testing, history, and session-state documents.
 
-- [ ] Record scroll-aware Navbar behavior, destinations, active state, top restoration, Skills content, dates, test count, and handoff.
+- [ ] Create the dated bilingual change specification and record scroll-aware Navbar behavior, destinations, active state, top restoration, Skills content, dates, test count, and handoff.
 - [ ] Run `npm run check`, `npm run specs:check`, `npm audit --omit=dev`, and `git diff --check`; expect zero failures and zero vulnerabilities.
 - [ ] Verify desktop/mobile, PT-BR/English, both scroll directions, active state, `/projects` at the top, mobile menu, keyboard, and a clean console.
 - [ ] Commit as `docs: record navigation and skills behavior`.

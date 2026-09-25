@@ -201,6 +201,8 @@ git commit -m "feat: update home skills carousel"
 ### Task 5: Memória técnica e validação final
 
 **Files:**
+- Create: `specs/changes/CHG-20260925-navigation-scroll-skills.md`
+- Create: `specs/changes/CHG-20260925-navigation-scroll-skills.en.md`
 - Modify: `specs/capabilities/core.md`
 - Modify: `specs/capabilities/core.en.md`
 - Modify: `specs/system.md`
@@ -214,7 +216,7 @@ git commit -m "feat: update home skills carousel"
 
 - [ ] **Step 1: Consolidar comportamento e evidência**
 
-Registrar Navbar por direção, destinos, item ativo, restauração no topo e conteúdo do bloco Habilidades. Atualizar datas, quantidade de testes e handoff em ambos os idiomas.
+Criar a especificação datada bilíngue da mudança e registrar Navbar por direção, destinos, item ativo, restauração no topo e conteúdo do bloco Habilidades. Atualizar datas, quantidade de testes e handoff em ambos os idiomas.
 
 - [ ] **Step 2: Executar gates**
 
