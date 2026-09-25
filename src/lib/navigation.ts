@@ -89,3 +89,11 @@ export function getNextNavbarScrollState({
 
   return { anchorY: currentY, visible: delta < 0 }
 }
+
+export function resolvePageScrollY(...positions: number[]): number {
+  return positions.reduce(
+    (maximum, position) =>
+      Number.isFinite(position) ? Math.max(maximum, position) : maximum,
+    0,
+  )
+}

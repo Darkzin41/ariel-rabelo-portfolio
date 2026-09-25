@@ -7,6 +7,7 @@ import {
   NAV_LINKS,
   getNextNavbarScrollState,
   resolveActiveNavItem,
+  resolvePageScrollY,
 } from "../lib/navigation"
 import LanguageSelector from "./LanguageSelector"
 
@@ -16,6 +17,28 @@ const accentOptions = [
   { id: "emerald", labelKey: "accentEmerald", color: "#10B981" },
   { id: "amber", labelKey: "accentAmber", color: "#F59E0B" },
 ] as const
+
+function readPageScrollY() {
+  return resolvePageScrollY(
+    window.scrollY,
+    document.documentElement.scrollTop,
+    document.body.scrollTop,
+  )
+}
+
+function addPageScrollListener(listener: () => void) {
+  window.addEventListener("scroll", listener, { passive: true })
+  document.documentElement.addEventListener("scroll", listener, {
+    passive: true,
+  })
+  document.body.addEventListener("scroll", listener, { passive: true })
+
+  return () => {
+    window.removeEventListener("scroll", listener)
+    document.documentElement.removeEventListener("scroll", listener)
+    document.body.removeEventListener("scroll", listener)
+  }
+}
 
 export default function Navbar() {
   const { accent, setAccent } = useTheme()
@@ -59,12 +82,14 @@ export default function Navbar() {
   )
 
   useEffect(() => {
-    scrollAnchorRef.current = window.scrollY
+    const initialY = readPageScrollY()
 
-    setScrolled(window.scrollY > 40)
+    scrollAnchorRef.current = initialY
+
+    setScrolled(initialY > 40)
 
     const onScroll = () => {
-      const currentY = window.scrollY
+      const currentY = readPageScrollY()
 
       setScrolled(currentY > 40)
 
@@ -82,15 +107,13 @@ export default function Navbar() {
       })
     }
 
-    window.addEventListener("scroll", onScroll, { passive: true })
-
-    return () => window.removeEventListener("scroll", onScroll)
+    return addPageScrollListener(onScroll)
   }, [panelsLocked])
 
   useEffect(() => {
     if (!panelsLocked) return
 
-    scrollAnchorRef.current = window.scrollY
+    scrollAnchorRef.current = readPageScrollY()
     setNavbarVisible(true)
   }, [panelsLocked])
 
@@ -119,11 +142,11 @@ export default function Navbar() {
       setActiveSection(current)
     }
 
-    window.addEventListener("scroll", update, { passive: true })
+    const removeScrollListener = addPageScrollListener(update)
 
     update()
 
-    return () => window.removeEventListener("scroll", update)
+    return removeScrollListener
   }, [location.pathname])
 
   useEffect(() => {
@@ -133,7 +156,7 @@ export default function Navbar() {
 
     setNavbarVisible(true)
 
-    scrollAnchorRef.current = window.scrollY
+    scrollAnchorRef.current = readPageScrollY()
   }, [location.pathname, location.hash])
 
   useEffect(() => {

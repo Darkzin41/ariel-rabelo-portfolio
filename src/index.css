@@ -72,11 +72,11 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 html, body, #root {
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
@@ -87,7 +87,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s var(--ease-in-out),
               color 0.3s var(--ease-in-out);
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 ::selection {

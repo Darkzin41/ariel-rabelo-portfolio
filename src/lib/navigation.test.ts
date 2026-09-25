@@ -4,6 +4,7 @@ import {
   NAV_LINKS,
   getNextNavbarScrollState,
   resolveActiveNavItem,
+  resolvePageScrollY,
 } from "./navigation.ts"
 
 test("navigation destinations keep Projects as a page and the remaining home items as sections", () => {
@@ -62,4 +63,11 @@ test("navbar stays visible near the top and while an interactive panel is open",
     }),
     { anchorY: 180, visible: true },
   )
+})
+
+test("scroll position also resolves when the browser scrolls the body element", () => {
+  assert.equal(resolvePageScrollY(0, 0, 3627), 3627)
+  assert.equal(resolvePageScrollY(640, 0, 0), 640)
+  assert.equal(resolvePageScrollY(0, 420, 0), 420)
+  assert.equal(resolvePageScrollY(-10, 0, 0), 0)
 })
