@@ -3,6 +3,11 @@ import { useState, useEffect, useRef, type MouseEvent } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useTheme } from "../contexts/theme"
 import { useLanguage } from "../contexts/language"
+import {
+  NAV_LINKS,
+  getNextNavbarScrollState,
+  resolveActiveNavItem,
+} from "../lib/navigation"
 import LanguageSelector from "./LanguageSelector"
 
 const accentOptions = [
@@ -12,27 +17,23 @@ const accentOptions = [
   { id: "amber", labelKey: "accentAmber", color: "#F59E0B" },
 ] as const
 
-const navLinkDefinitions = [
-  { href: "#inicio", labelKey: "home" },
-  { href: "#projetos", labelKey: "projects" },
-  { href: "#habilidades", labelKey: "skills" },
-  { href: "#experiencia", labelKey: "experience" },
-  { href: "#contato", labelKey: "contact" },
-] as const
-
 export default function Navbar() {
   const { accent, setAccent } = useTheme()
   const { messages } = useLanguage()
   const copy = messages.nav
-  const navLinks = navLinkDefinitions.map((link) => ({
-    href: link.href,
+  const navLinks = NAV_LINKS.map((link) => ({
+    ...link,
     label: copy[link.labelKey],
   }))
   const [scrolled, setScrolled] = useState(false)
 
+  const [navbarVisible, setNavbarVisible] = useState(true)
+
   const [accentOpen, setAccentOpen] = useState(false)
 
   const [menuOpen, setMenuOpen] = useState(false)
+
+  const [languageOpen, setLanguageOpen] = useState(false)
 
   const [activeSection, setActiveSection] = useState("inicio")
 
@@ -44,26 +45,61 @@ export default function Navbar() {
 
   const accentPanelRef = useRef<HTMLDivElement>(null)
 
+  const scrollAnchorRef = useRef(0)
+
   const location = useLocation()
 
   const navigate = useNavigate()
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+  const panelsLocked = menuOpen || accentOpen || languageOpen
 
-    onScroll()
+  const activeNavItem = resolveActiveNavItem(
+    location.pathname,
+    activeSection,
+  )
+
+  useEffect(() => {
+    scrollAnchorRef.current = window.scrollY
+
+    setScrolled(window.scrollY > 40)
+
+    const onScroll = () => {
+      const currentY = window.scrollY
+
+      setScrolled(currentY > 40)
+
+      setNavbarVisible((visible) => {
+        const nextState = getNextNavbarScrollState({
+          anchorY: scrollAnchorRef.current,
+          currentY,
+          visible,
+          locked: panelsLocked,
+        })
+
+        scrollAnchorRef.current = nextState.anchorY
+
+        return nextState.visible
+      })
+    }
 
     window.addEventListener("scroll", onScroll, { passive: true })
 
     return () => window.removeEventListener("scroll", onScroll)
-  }, [])
+  }, [panelsLocked])
+
+  useEffect(() => {
+    if (!panelsLocked) return
+
+    scrollAnchorRef.current = window.scrollY
+    setNavbarVisible(true)
+  }, [panelsLocked])
 
   // Scroll-spy: track which section is in view
 
   useEffect(() => {
     if (location.pathname !== "/") return
 
-    const ids = ["inicio", "projetos", "habilidades", "experiencia", "contato"]
+    const ids = ["inicio", "habilidades", "experiencia", "contato"]
 
     const update = () => {
       const offset = 120
@@ -94,7 +130,11 @@ export default function Navbar() {
     setMenuOpen(false)
 
     setAccentOpen(false)
-  }, [location])
+
+    setNavbarVisible(true)
+
+    scrollAnchorRef.current = window.scrollY
+  }, [location.pathname, location.hash])
 
   useEffect(() => {
     if (menuOpen) firstMenuLinkRef.current?.focus()
@@ -150,7 +190,10 @@ export default function Navbar() {
   useEffect(() => {
     if (
       location.pathname !== "/" ||
-      !navLinks.some((link) => link.href === location.hash)
+      !NAV_LINKS.some(
+        (link) =>
+          "sectionId" in link && link.sectionId === location.hash.slice(1),
+      )
     )
       return
 
@@ -165,7 +208,7 @@ export default function Navbar() {
     return () => window.cancelAnimationFrame(frame)
   }, [location.pathname, location.hash, location.key])
 
-  const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, to: string) => {
     if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)
       return
 
@@ -173,7 +216,7 @@ export default function Navbar() {
 
     setMenuOpen(false)
 
-    navigate(`/${href}`)
+    navigate(to)
   }
 
   return (
@@ -182,6 +225,10 @@ export default function Navbar() {
         aria-label={copy.mainLabel}
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         style={{
+          transform: navbarVisible ? "translateY(0)" : "translateY(-100%)",
+
+          pointerEvents: navbarVisible ? "auto" : "none",
+
           background: scrolled ? "rgba(8,9,12,0.88)" : "transparent",
 
           backdropFilter: scrolled ? "blur(20px) saturate(1.4)" : "none",
@@ -219,16 +266,20 @@ export default function Navbar() {
           {/* Desktop nav links — individual pills */}
           <div className="hidden xl:flex items-center justify-center gap-2">
             {navLinks.map((link) => {
-              const id = link.href.replace("#", "")
-
-              const isActive = location.pathname === "/" && activeSection === id
+              const isActive = activeNavItem === link.id
 
               return (
                 <a
-                  key={link.href}
-                  href={`/${link.href}`}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  aria-current={isActive ? "location" : undefined}
+                  key={link.id}
+                  href={link.to}
+                  onClick={(e) => handleNavClick(e, link.to)}
+                  aria-current={
+                    isActive
+                      ? location.pathname === "/"
+                        ? "location"
+                        : "page"
+                      : undefined
+                  }
                   className="min-h-11 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap"
                   style={{
                     padding: "10px 16px",
@@ -273,7 +324,7 @@ export default function Navbar() {
               GitHub ↗
             </a>
 
-            <LanguageSelector />
+            <LanguageSelector onOpenChange={setLanguageOpen} />
 
             {/* Accent toggle */}
             <div className="relative">
@@ -365,7 +416,7 @@ export default function Navbar() {
 
           {/* Mobile actions */}
           <div className="xl:hidden col-start-3 flex items-center gap-2">
-            <LanguageSelector />
+            <LanguageSelector onOpenChange={setLanguageOpen} />
             <button
               ref={menuTriggerRef}
               className="w-11 h-11 rounded-full flex items-center justify-center"
@@ -421,18 +472,21 @@ export default function Navbar() {
           >
             <div className="w-wide py-4 flex flex-col gap-1">
               {navLinks.map((link, index) => {
-                const id = link.href.replace("#", "")
-
-                const isActive =
-                  location.pathname === "/" && activeSection === id
+                const isActive = activeNavItem === link.id
 
                 return (
                   <a
-                    key={link.href}
+                    key={link.id}
                     ref={index === 0 ? firstMenuLinkRef : undefined}
-                    href={`/${link.href}`}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    aria-current={isActive ? "location" : undefined}
+                    href={link.to}
+                    onClick={(e) => handleNavClick(e, link.to)}
+                    aria-current={
+                      isActive
+                        ? location.pathname === "/"
+                          ? "location"
+                          : "page"
+                        : undefined
+                    }
                     className="min-h-11 flex items-center px-3 py-2.5 rounded-lg text-sm font-medium"
                     style={{
                       color: isActive

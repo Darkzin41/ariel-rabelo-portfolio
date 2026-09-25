@@ -8,13 +8,27 @@ import {
 import { SUPPORTED_LOCALES, type Locale } from "../i18n/core"
 import { useLanguage } from "../contexts/language"
 
-export default function LanguageSelector() {
+interface LanguageSelectorProps {
+  onOpenChange?: (open: boolean) => void
+}
+
+export default function LanguageSelector({
+  onOpenChange,
+}: LanguageSelectorProps) {
   const { locale, messages, setLocale } = useLanguage()
   const [open, setOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLButtonElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
   const menuId = useId()
+
+  useEffect(() => {
+    onOpenChange?.(open)
+
+    return () => {
+      if (open) onOpenChange?.(false)
+    }
+  }, [onOpenChange, open])
 
   useEffect(() => {
     if (!open) return
