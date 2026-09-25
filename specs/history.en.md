@@ -2,6 +2,15 @@
 
 [Português](history.md) | [English](history.en.md)
 
+## 2026-09-25 — direction-aware navigation and refined Skills
+
+- The Navbar now hides while scrolling down and returns while scrolling up, remaining visible during interactive menus.
+- Active state now follows home sections and the Projects and Stack routes.
+- “Projects” now opens `/projects` directly, and page changes start at the top before paint.
+- The scrolling root was normalized so pages cannot inherit previous positions.
+- The home Skills carousel replaced Next.js and Power BI with PostgreSQL without changing detailed data or projects.
+- Twenty automated tests and manual desktop/mobile review in PT-BR/English passed locally.
+
 ## 2026-09-24 — independent bilingual personal portfolio
 
 - The public identity became Ariel Rabelo, Full Stack Developer specializing in Python, PHP, and AI.

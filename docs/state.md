@@ -4,20 +4,22 @@
 
 ## Visão operacional
 
-O portfólio pessoal bilíngue está implementado na branch isolada `codex/personal-bilingual-portfolio`. A versão acadêmica original permanece no repositório de origem, sem alterações no `main`.
+O portfólio pessoal bilíngue está no repositório independente `Darkzin41/ariel-rabelo-portfolio`. As correções atuais estão isoladas na branch `codex/navbar-scroll-skills`, no worktree `ariel-rabelo-portfolio-nav-worktree`; o `main` permanece intacto até a integração.
 
 ## Resultado atual
 
 - Interface, conteúdo assistivo e metadados completos em PT-BR e inglês.
 - Identidade pública de Ariel Rabelo e posicionamento Full Stack/Python/PHP/IA.
 - Código independente, padronizado em npm e sem infraestrutura específica de ferramentas de design.
-- Destino de publicação aprovado: `Darkzin41/ariel-rabelo-portfolio`, com histórico limpo.
+- Navbar por direção, item ativo sincronizado, rota `/projects` direta e reset instantâneo no topo.
+- Carrossel Habilidades da home com PostgreSQL, sem Next.js ou Power BI; dados detalhados preservados.
+- Repositório público: `Darkzin41/ariel-rabelo-portfolio`.
 - Nenhum deploy previsto nesta rodada.
 
 ## Verificação
 
-TypeScript, 13 testes, build, specs, auditoria de produção, busca por segredos e revisão manual responsiva compõem o gate final descrito em `../specs/testing.md`.
+TypeScript, 20 testes, build, specs, auditoria de produção, revisão manual responsiva e console limpo compõem o gate final descrito em `../specs/testing.md`.
 
 ## Handoff
 
-Preservar a branch e o worktree de preparação para recuperação. Mudanças futuras devem partir do novo repositório pessoal; o repositório acadêmico não deve receber esta branch.
+Integrar somente no repositório pessoal após o gate final. Preservar a branch e o worktree até a sincronização; o repositório acadêmico não deve receber esta branch.

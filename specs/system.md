@@ -2,7 +2,7 @@
 
 [Português](system.md) | [English](system.en.md)
 
-**Última verificação:** 2026-09-24
+**Última verificação:** 2026-09-25
 
 **Referência:** `working-tree`
 
@@ -28,6 +28,12 @@ O projeto entrega um portfólio pessoal bilíngue como aplicação React de pág
 - `LanguageProvider` resolve e persiste idioma; `AccentColorProvider` preserva a preferência visual.
 - Navbar, Hero, projetos destacados, Saturn e carrossel encapsulam suas interações.
 
+## Navegação e rolagem
+
+`src/lib/navigation.ts` concentra destinos, resolução do item ativo e a regra determinística de direção da Navbar. Na home, o scroll-spy acompanha Início, Habilidades, Experiência e Contato; `/projects` e seus detalhes ativam Projetos, enquanto `/stack` ativa Habilidades. A Navbar observa a rolagem do documento, esconde ao descer, reaparece ao subir e permanece aberta enquanto um menu interativo estiver em uso.
+
+`ScrollToTop` desativa a restauração automática do histórico e reposiciona trocas de pathname antes da pintura, sem interferir na navegação suave por hash. A raiz usa altura mínima e `overflow-x: clip`, mantendo o documento como superfície de rolagem e evitando que uma rota herde a posição da anterior.
+
 ## Internacionalização e metadados
 
 `Locale` aceita apenas `pt-BR | en`. `LanguageProvider` inicia com a preferência válida de `localStorage`, usa português como fallback e grava em `ariel-rabelo.locale`. Mudanças atualizam `html[lang]`, título, descrição, Open Graph e Twitter. `useLanguage()` expõe locale, mensagens e alteração de idioma aos componentes.
@@ -42,3 +48,4 @@ Não há backend. Idioma e cor de destaque são as únicas preferências persist
 - Rotas compartilham os mesmos slugs em português e inglês.
 - Metadados são atualizados no cliente; renderização estática ou SSR não fazem parte da arquitetura atual.
 - Deploy não está configurado neste repositório.
+- O carrossel resumido de Habilidades e a página detalhada de stack são conjuntos independentes; a home exibe PostgreSQL no lugar de Next.js e Power BI sem reescrever fatos detalhados.

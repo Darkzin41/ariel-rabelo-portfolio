@@ -2,6 +2,15 @@
 
 [Português](history.md) | [English](history.en.md)
 
+## 2026-09-25 — navegação por direção e Habilidades ajustadas
+
+- A Navbar passou a desaparecer ao rolar para baixo e reaparecer ao rolar para cima, permanecendo visível durante menus interativos.
+- O estado ativo passou a acompanhar seções da home e as rotas de Projetos e Stack.
+- “Projetos” passou a abrir `/projects` diretamente, e trocas de página agora começam no topo antes da pintura.
+- A raiz de rolagem foi normalizada para impedir que páginas herdem posições anteriores.
+- O carrossel Habilidades da home substituiu Next.js e Power BI por PostgreSQL sem alterar dados detalhados ou projetos.
+- Vinte testes automatizados e revisão manual em desktop/mobile e PT-BR/inglês passaram localmente.
+
 ## 2026-09-24 — portfólio pessoal bilíngue e independente
 
 - A identidade pública passou a Ariel Rabelo, Desenvolvedor Full Stack especializado em Python, PHP e IA.

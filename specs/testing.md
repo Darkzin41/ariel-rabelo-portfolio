@@ -2,19 +2,19 @@
 
 [Português](testing.md) | [English](testing.en.md)
 
-**Última verificação:** 2026-09-24
+**Última verificação:** 2026-09-25
 
 ## Gates automatizados
 
 | Comando | Evidência |
 |---|---|
 | `npm run typecheck` | Contratos TypeScript |
-| `npm test` | Oito testes de idioma/conteúdo e cinco testes do carrossel |
+| `npm test` | Nove testes de idioma/conteúdo, cinco do carrossel e seis de navegação |
 | `npm run build` | Bundle de produção sem avisos de configuração legada |
 | `python scripts/validate_specs.py .` | Estrutura, pares de idioma, links e contratos da memória técnica |
 | `npm audit --omit=dev` | Auditoria de dependências de produção |
 
-`npm run check` executa TypeScript, os 13 testes e o build em sequência.
+`npm run check` executa TypeScript, os 20 testes e o build em sequência.
 
 ## Responsabilidade por camada
 
@@ -23,8 +23,9 @@
 | Resolução, fallback e persistência de locale | `src/i18n/core.test.ts` |
 | Integridade dos catálogos, projetos e especialidades | `src/i18n/content.test.ts` |
 | Movimento determinístico do carrossel | `src/lib/carouselMotion.test.ts` |
+| Destinos, item ativo, direção da Navbar e fontes de rolagem | `src/lib/navigation.test.ts` |
 | UI, rotas e dados | TypeScript, build e inspeção no navegador local |
-| Responsividade | Navegador local em 375, 1280 e 1920 px, sem overflow horizontal |
+| Responsividade | Navegador local em 375, 1440 e 1920 px, sem overflow horizontal |
 | Acessibilidade interativa | Menus, ARIA, `Escape`, retorno de foco, filtros e controles do carrossel |
 | Metadados | `html[lang]`, título, descrição e Open Graph inspecionados nos dois idiomas |
 
@@ -40,6 +41,10 @@
 - Preferência de idioma confirmada após recarga.
 - Seletor e menu mobile conferidos com mouse e teclado; `Escape` restaura o foco.
 - Cor de destaque e rotas existentes preservadas.
+- Navbar conferida em 1440 px: desaparece ao descer, reaparece ao subir, sincroniza o item ativo e mantém-se visível com menus abertos.
+- “Projetos” confirmado em `/projects`, com entrada imediata no topo mesmo após navegação iniciada no meio da home.
+- Carrossel Habilidades confirmado com PostgreSQL e sem Next.js ou Power BI; os dados detalhados permanecem inalterados.
+- Menu mobile conferido em 375 px, incluindo destino de Projetos, inglês, `Escape` e retorno de foco.
 - Console do navegador sem erros ou avisos durante a revisão.
 
 ## Lacunas

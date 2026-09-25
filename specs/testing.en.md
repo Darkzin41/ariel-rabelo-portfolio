@@ -2,19 +2,19 @@
 
 [Português](testing.md) | [English](testing.en.md)
 
-**Last verified:** 2026-09-24
+**Last verified:** 2026-09-25
 
 ## Automated gates
 
 | Command | Evidence |
 |---|---|
 | `npm run typecheck` | TypeScript contracts |
-| `npm test` | Eight language/content tests and five carousel tests |
+| `npm test` | Nine language/content tests, five carousel tests, and six navigation tests |
 | `npm run build` | Production bundle without legacy configuration warnings |
 | `python scripts/validate_specs.py .` | Technical-memory structure, language pairs, links, and contracts |
 | `npm audit --omit=dev` | Production dependency audit |
 
-`npm run check` runs TypeScript, all 13 tests, and the build in sequence.
+`npm run check` runs TypeScript, all 20 tests, and the build in sequence.
 
 ## Responsibility by layer
 
@@ -23,8 +23,9 @@
 | Locale resolution, fallback, and persistence | `src/i18n/core.test.ts` |
 | Catalog, project, and specialty integrity | `src/i18n/content.test.ts` |
 | Deterministic carousel movement | `src/lib/carouselMotion.test.ts` |
+| Destinations, active item, Navbar direction, and scroll sources | `src/lib/navigation.test.ts` |
 | UI, routes, and data | TypeScript, build, and local browser inspection |
-| Responsiveness | Local browser at 375, 1280, and 1920 px, with no horizontal overflow |
+| Responsiveness | Local browser at 375, 1440, and 1920 px, with no horizontal overflow |
 | Interactive accessibility | Menus, ARIA, `Escape`, focus restoration, filters, and carousel controls |
 | Metadata | `html[lang]`, title, description, and Open Graph inspected in both languages |
 
@@ -40,6 +41,10 @@
 - Language preference confirmed after reload.
 - Language selector and mobile menu checked with mouse and keyboard; `Escape` restores focus.
 - Accent color and existing routes preserved.
+- Navbar checked at 1440 px: it hides while moving down, returns while moving up, synchronizes its active item, and remains visible with open menus.
+- “Projects” confirmed at `/projects`, entering immediately at the top even when navigation starts midway through the home page.
+- Skills carousel confirmed with PostgreSQL and without Next.js or Power BI; detailed data remains unchanged.
+- Mobile menu checked at 375 px, including the Projects destination, English, `Escape`, and focus restoration.
 - Browser console remained free of errors and warnings during review.
 
 ## Gaps

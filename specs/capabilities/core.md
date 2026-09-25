@@ -2,7 +2,7 @@
 id: core
 contract_status: confirmed
 implementation_status: verified
-last_verified: 2026-09-24
+last_verified: 2026-09-25
 last_verified_ref: working-tree
 ---
 
@@ -29,6 +29,10 @@ Qualquer visitante pode navegar, alternar entre português do Brasil e inglês, 
 - Somente Agiliza Transparência e Arquivo Digital de História Indígena aparecem como projetos destacados.
 - A grade completa mantém seis projetos e as rotas `/`, `/projects`, `/projects/:slug` e `/stack`.
 - O carrossel mantém mouse, touch, teclado, pausa e suporte a movimento reduzido.
+- A Navbar permanece visível no topo, desaparece ao rolar para baixo e reaparece ao rolar para cima; menus abertos mantêm a barra visível.
+- O estado ativo acompanha Início, Habilidades, Experiência e Contato na home, Projetos em `/projects` e detalhes, e Habilidades em `/stack`.
+- “Projetos” abre `/projects` diretamente, e toda troca de pathname posiciona a nova página no topo antes da pintura.
+- O carrossel Habilidades da home contém PostgreSQL e não contém Next.js ou Power BI.
 
 ## Invariantes e regras de negócio
 
@@ -38,6 +42,7 @@ Qualquer visitante pode navegar, alternar entre português do Brasil e inglês, 
 - Scikit-learn permanece em `exploring`, sem vínculo com projeto.
 - O carrossel avança a 27 px/s e preserva o restante ao normalizar nos dois sentidos.
 - Valores de idioma inválidos ou armazenamento indisponível retornam com segurança a `pt-BR`.
+- A substituição por PostgreSQL é exclusiva do carrossel Habilidades da home; dados detalhados da stack e fatos dos projetos permanecem intactos.
 
 ## Estado atual e lacunas
 
@@ -47,6 +52,7 @@ O contrato está implementado e verificado localmente. Não há suíte E2E persi
 
 - Idioma e metadados: `src/contexts/language.tsx`, `src/components/LanguageSelector.tsx` e `src/i18n/`.
 - Dados localizados: `src/data/projects.ts` e `src/data/stack.ts`.
+- Navegação e rolagem: `src/lib/navigation.ts`, `src/components/Navbar.tsx`, `src/App.tsx` e `src/index.css`.
 - Gates reproduzíveis: `npm run check` e `python scripts/validate_specs.py .`.
 - Auditoria: `npm audit --omit=dev`.
 - Validação manual: rotas nos dois idiomas, persistência após recarga, menus por teclado e breakpoints de 375 a 1920 px.
@@ -54,5 +60,6 @@ O contrato está implementado e verificado localmente. Não há suíte E2E persi
 ## Relações
 
 - Especificação relacionada: `../changes/CHG-20260924-bilingual-personal-portfolio.md`.
+- Especificação relacionada: `../changes/CHG-20260925-navigation-scroll-skills.md`.
 - Decisões abertas: `../open-decisions.md`.
 - ADR relacionado: nenhum.

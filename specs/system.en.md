@@ -2,7 +2,7 @@
 
 [Português](system.md) | [English](system.en.md)
 
-**Last verified:** 2026-09-24
+**Last verified:** 2026-09-25
 
 **Reference:** `working-tree`
 
@@ -28,6 +28,12 @@ The project delivers a bilingual personal portfolio as a React single-page appli
 - `LanguageProvider` resolves and persists language; `AccentColorProvider` preserves the visual preference.
 - Navbar, Hero, featured projects, Saturn, and carousel encapsulate their interactions.
 
+## Navigation and scrolling
+
+`src/lib/navigation.ts` centralizes destinations, active-item resolution, and the deterministic Navbar direction rule. On the home page, scroll-spy follows Home, Skills, Experience, and Contact; `/projects` and its detail routes activate Projects, while `/stack` activates Skills. The Navbar observes document scrolling, hides while moving down, returns while moving up, and stays visible while an interactive menu is in use.
+
+`ScrollToTop` disables automatic history restoration and resets pathname changes before paint without interfering with smooth hash navigation. The root uses minimum height and `overflow-x: clip`, keeping the document as the scrolling surface and preventing a route from inheriting the previous route's position.
+
 ## Internationalization and metadata
 
 `Locale` accepts only `pt-BR | en`. `LanguageProvider` initializes from a valid `localStorage` preference, falls back to Portuguese, and writes to `ariel-rabelo.locale`. Changes update `html[lang]`, title, description, Open Graph, and Twitter metadata. `useLanguage()` exposes locale, messages, and language changes to components.
@@ -42,3 +48,4 @@ There is no backend. Language and accent color are the only browser-persisted pr
 - Routes share the same slugs in Portuguese and English.
 - Metadata is updated on the client; static rendering and SSR are outside the current architecture.
 - Deployment is not configured in this repository.
+- The summarized Skills carousel and detailed stack page are independent sets; the home page shows PostgreSQL instead of Next.js and Power BI without rewriting detailed facts.
