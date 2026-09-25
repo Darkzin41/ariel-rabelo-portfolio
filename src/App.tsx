@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
 
-import { useEffect } from "react"
+import { useEffect, useLayoutEffect } from "react"
 
 import { ThemeProvider } from "./contexts/theme"
 import { LanguageProvider } from "./contexts/language"
@@ -21,8 +21,18 @@ import Stack from "./pages/Stack"
 function ScrollToTop() {
   const { pathname } = useLocation()
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" })
+  useLayoutEffect(() => {
+    const previousScrollRestoration = window.history.scrollRestoration
+
+    window.history.scrollRestoration = "manual"
+
+    return () => {
+      window.history.scrollRestoration = previousScrollRestoration
+    }
+  }, [])
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
   }, [pathname])
 
   return null
