@@ -40,12 +40,12 @@ O projeto entrega um portfólio pessoal bilíngue como aplicação React de pág
 
 ## Estado, persistência e integrações
 
-Não há backend. Idioma e cor de destaque são as únicas preferências persistidas no navegador. Links externos apontam para GitHub, LinkedIn e e-mail; nenhum segredo ou token é necessário para executar a aplicação.
+Não há backend. Idioma e cor de destaque são as únicas preferências persistidas no navegador. Links externos apontam para GitHub, LinkedIn e e-mail; nenhum segredo ou token é necessário para executar a aplicação. O repositório GitHub está integrado externamente à Vercel, que publica a branch `main` em produção.
 
 ## Restrições
 
 - Conteúdo é estático e precisa ser atualizado nos dois idiomas.
 - Rotas compartilham os mesmos slugs em português e inglês.
 - Metadados são atualizados no cliente; renderização estática ou SSR não fazem parte da arquitetura atual.
-- Deploy não está configurado neste repositório.
+- `vercel.json` reescreve requisições de rotas públicas para `index.html`, permitindo acesso direto às rotas do React Router; credenciais e vínculo do projeto permanecem fora do repositório.
 - O carrossel resumido de Habilidades e a página detalhada de stack são conjuntos independentes; a home exibe PostgreSQL no lugar de Next.js e Power BI sem reescrever fatos detalhados.

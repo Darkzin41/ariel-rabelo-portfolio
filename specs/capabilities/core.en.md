@@ -12,7 +12,7 @@ last_verified_ref: working-tree
 
 ## Purpose and boundaries
 
-Present Ariel Rabelo's professional identity, projects, stack, experience, education, and contact channels. The central positioning is Full Stack Developer specializing in Python, PHP, and Artificial Intelligence. The application is frontend-only and does not include a backend, authentication, data collection, hosting, or deployment.
+Present Ariel Rabelo's professional identity, projects, stack, experience, education, and contact channels. The central positioning is Full Stack Developer specializing in Python, PHP, and Artificial Intelligence. The application is frontend-only, has no backend, authentication, or data collection, and is published on Vercel.
 
 ## Actors, permissions, inputs, and outcomes
 
@@ -46,7 +46,7 @@ Any visitor can browse, switch between Brazilian Portuguese and English, filter 
 
 ## Current state and gaps
 
-The contract is implemented and locally verified. There is no persisted E2E suite; UI interactions and breakpoints are checked manually. Code publication and site deployment are separate operations, and deployment is outside this delivery.
+The contract is implemented and locally verified. There is no persisted E2E suite; UI interactions and breakpoints are checked manually. The public code lives on GitHub, and production is published on Vercel through the external integration with the `main` branch.
 
 ## Implementation and test evidence
 
@@ -55,11 +55,13 @@ The contract is implemented and locally verified. There is no persisted E2E suit
 - Navigation and scrolling: `src/lib/navigation.ts`, `src/components/Navbar.tsx`, `src/App.tsx`, and `src/index.css`.
 - Reproducible gates: `npm run check` and `python scripts/validate_specs.py .`.
 - Audit: `npm audit --omit=dev`.
+- Deployment: `vercel.json` provides the SPA fallback; GitHub/Vercel integration status and public routes are checked after publication.
 - Manual validation: all routes in both languages, persistence after reload, keyboard menus, and breakpoints from 375 to 1920 px.
 
 ## Relationships
 
 - Related specification: `../changes/CHG-20260924-bilingual-personal-portfolio.en.md`.
 - Related specification: `../changes/CHG-20260925-navigation-scroll-skills.en.md`.
+- Related specification: `../changes/CHG-20260925-vercel-production.en.md`.
 - Open decisions: `../open-decisions.en.md`.
 - Related ADR: none.

@@ -6,6 +6,10 @@ The bilingual personal portfolio of **Ariel Rabelo**, a **Full Stack Developer s
 
 The application brings together professional projects, research, academic experiments, experience, education, and technologies in a responsive editorial interface. The code is an independent React codebase maintained directly in this repository.
 
+## Live site
+
+[Open the production portfolio](https://ariel-rabelo-portfolio.vercel.app).
+
 ## Highlights
 
 - Complete interface in Brazilian Portuguese and English;
@@ -52,7 +56,7 @@ python scripts/validate_specs.py .
 npm audit --omit=dev
 ```
 
-`npm test` runs locale resolution, catalog and localized-data integrity tests, plus the carousel's five deterministic tests.
+`npm test` runs locale resolution, catalog and localized-data integrity, navigation, deployment configuration, and the carousel's five deterministic tests.
 
 ## Main structure
 

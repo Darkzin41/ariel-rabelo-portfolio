@@ -33,6 +33,7 @@ Este diretório registra o contrato necessário para compreender e modificar o p
 | Testes, acessibilidade e responsividade | `testing.md` |
 | Internacionalização e desacoplamento | `changes/CHG-20260924-bilingual-personal-portfolio.md` |
 | Navbar, rolagem, rota de projetos e carrossel de habilidades | `changes/CHG-20260925-navigation-scroll-skills.md` |
+| Publicação no GitHub e produção na Vercel | `changes/CHG-20260925-vercel-production.md` |
 
 ## Manutenção
 

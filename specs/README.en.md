@@ -33,6 +33,7 @@ This directory records the contract required to understand and modify the biling
 | Tests, accessibility, and responsiveness | `testing.en.md` |
 | Internationalization and decoupling | `changes/CHG-20260924-bilingual-personal-portfolio.en.md` |
 | Navbar, scrolling, Projects route, and Skills carousel | `changes/CHG-20260925-navigation-scroll-skills.en.md` |
+| GitHub publication and Vercel production | `changes/CHG-20260925-vercel-production.en.md` |
 
 ## Maintenance
 

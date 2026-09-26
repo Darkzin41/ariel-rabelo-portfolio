@@ -40,12 +40,12 @@ The project delivers a bilingual personal portfolio as a React single-page appli
 
 ## State, persistence, and integrations
 
-There is no backend. Language and accent color are the only browser-persisted preferences. External links point to GitHub, LinkedIn, and email; the application requires no secret or token to run.
+There is no backend. Language and accent color are the only browser-persisted preferences. External links point to GitHub, LinkedIn, and email; the application requires no secret or token to run. The GitHub repository is externally integrated with Vercel, which publishes the `main` branch to production.
 
 ## Constraints
 
 - Content is static and must be updated in both languages.
 - Routes share the same slugs in Portuguese and English.
 - Metadata is updated on the client; static rendering and SSR are outside the current architecture.
-- Deployment is not configured in this repository.
+- `vercel.json` rewrites public route requests to `index.html`, allowing direct access to React Router routes; credentials and project linkage remain outside the repository.
 - The summarized Skills carousel and detailed stack page are independent sets; the home page shows PostgreSQL instead of Next.js and Power BI without rewriting detailed facts.

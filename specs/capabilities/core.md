@@ -12,7 +12,7 @@ last_verified_ref: working-tree
 
 ## Finalidade e limites
 
-Apresentar a identidade profissional, os projetos, a stack, a experiência, a formação e os meios de contato de Ariel Rabelo. O posicionamento central é Desenvolvedor Full Stack especializado em Python, PHP e Inteligência Artificial. A aplicação é somente frontend e não inclui backend, autenticação, coleta de dados, hospedagem ou deploy.
+Apresentar a identidade profissional, os projetos, a stack, a experiência, a formação e os meios de contato de Ariel Rabelo. O posicionamento central é Desenvolvedor Full Stack especializado em Python, PHP e Inteligência Artificial. A aplicação é somente frontend, não inclui backend, autenticação ou coleta de dados e é publicada na Vercel.
 
 ## Atores, permissões, entradas e resultados
 
@@ -46,7 +46,7 @@ Qualquer visitante pode navegar, alternar entre português do Brasil e inglês, 
 
 ## Estado atual e lacunas
 
-O contrato está implementado e verificado localmente. Não há suíte E2E persistida; interações de UI e breakpoints são conferidos manualmente. Publicação do código e deploy do site são operações separadas, e deploy não faz parte desta entrega.
+O contrato está implementado e verificado localmente. Não há suíte E2E persistida; interações de UI e breakpoints são conferidos manualmente. O código público vive no GitHub e a produção é publicada na Vercel pela integração externa com a branch `main`.
 
 ## Evidências de implementação e teste
 
@@ -55,11 +55,13 @@ O contrato está implementado e verificado localmente. Não há suíte E2E persi
 - Navegação e rolagem: `src/lib/navigation.ts`, `src/components/Navbar.tsx`, `src/App.tsx` e `src/index.css`.
 - Gates reproduzíveis: `npm run check` e `python scripts/validate_specs.py .`.
 - Auditoria: `npm audit --omit=dev`.
+- Deploy: `vercel.json` garante fallback da SPA; o status da integração GitHub/Vercel e as rotas públicas são verificados após a publicação.
 - Validação manual: rotas nos dois idiomas, persistência após recarga, menus por teclado e breakpoints de 375 a 1920 px.
 
 ## Relações
 
 - Especificação relacionada: `../changes/CHG-20260924-bilingual-personal-portfolio.md`.
 - Especificação relacionada: `../changes/CHG-20260925-navigation-scroll-skills.md`.
+- Especificação relacionada: `../changes/CHG-20260925-vercel-production.md`.
 - Decisões abertas: `../open-decisions.md`.
 - ADR relacionado: nenhum.

@@ -9,12 +9,12 @@
 | Comando | Evidência |
 |---|---|
 | `npm run typecheck` | Contratos TypeScript |
-| `npm test` | Nove testes de idioma/conteúdo, cinco do carrossel e seis de navegação |
+| `npm test` | Dez testes de idioma/conteúdo, cinco do carrossel, seis de navegação e um de configuração de deploy |
 | `npm run build` | Bundle de produção sem avisos de configuração legada |
 | `python scripts/validate_specs.py .` | Estrutura, pares de idioma, links e contratos da memória técnica |
 | `npm audit --omit=dev` | Auditoria de dependências de produção |
 
-`npm run check` executa TypeScript, os 20 testes e o build em sequência.
+`npm run check` executa TypeScript, os 22 testes e o build em sequência.
 
 ## Responsabilidade por camada
 
@@ -24,6 +24,7 @@
 | Integridade dos catálogos, projetos e especialidades | `src/i18n/content.test.ts` |
 | Movimento determinístico do carrossel | `src/lib/carouselMotion.test.ts` |
 | Destinos, item ativo, direção da Navbar e fontes de rolagem | `src/lib/navigation.test.ts` |
+| Fallback de rotas públicas na Vercel | `src/lib/deployment.test.ts` |
 | UI, rotas e dados | TypeScript, build e inspeção no navegador local |
 | Responsividade | Navegador local em 375, 1440 e 1920 px, sem overflow horizontal |
 | Acessibilidade interativa | Menus, ARIA, `Escape`, retorno de foco, filtros e controles do carrossel |

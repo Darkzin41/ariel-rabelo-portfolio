@@ -9,12 +9,12 @@
 | Command | Evidence |
 |---|---|
 | `npm run typecheck` | TypeScript contracts |
-| `npm test` | Nine language/content tests, five carousel tests, and six navigation tests |
+| `npm test` | Ten language/content tests, five carousel tests, six navigation tests, and one deployment-configuration test |
 | `npm run build` | Production bundle without legacy configuration warnings |
 | `python scripts/validate_specs.py .` | Technical-memory structure, language pairs, links, and contracts |
 | `npm audit --omit=dev` | Production dependency audit |
 
-`npm run check` runs TypeScript, all 20 tests, and the build in sequence.
+`npm run check` runs TypeScript, all 22 tests, and the build in sequence.
 
 ## Responsibility by layer
 
@@ -24,6 +24,7 @@
 | Catalog, project, and specialty integrity | `src/i18n/content.test.ts` |
 | Deterministic carousel movement | `src/lib/carouselMotion.test.ts` |
 | Destinations, active item, Navbar direction, and scroll sources | `src/lib/navigation.test.ts` |
+| Vercel public-route fallback | `src/lib/deployment.test.ts` |
 | UI, routes, and data | TypeScript, build, and local browser inspection |
 | Responsiveness | Local browser at 375, 1440, and 1920 px, with no horizontal overflow |
 | Interactive accessibility | Menus, ARIA, `Escape`, focus restoration, filters, and carousel controls |

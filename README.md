@@ -6,6 +6,10 @@ Portfólio pessoal bilíngue de **Ariel Rabelo**, **Desenvolvedor Full Stack esp
 
 A aplicação reúne projetos profissionais, pesquisa, experimentos acadêmicos, experiência, formação e tecnologias em uma interface editorial responsiva. O código é uma base React independente, mantida diretamente neste repositório.
 
+## Site publicado
+
+[Acesse o portfólio em produção](https://ariel-rabelo-portfolio.vercel.app).
+
 ## Destaques
 
 - Interface completa em português do Brasil e inglês;
@@ -52,7 +56,7 @@ python scripts/validate_specs.py .
 npm audit --omit=dev
 ```
 
-`npm test` executa os testes de idioma, integridade dos catálogos e dados localizados, além dos cinco testes determinísticos do carrossel.
+`npm test` executa os testes de idioma, integridade dos catálogos e dados localizados, navegação, configuração de deploy e os cinco testes determinísticos do carrossel.
 
 ## Estrutura principal
 
