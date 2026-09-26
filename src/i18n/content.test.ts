@@ -1,4 +1,5 @@
 import assert from "node:assert/strict"
+import { readFileSync } from "node:fs"
 import test from "node:test"
 import { allProjects, getLocalizedProjects } from "../data/projects.ts"
 import {
@@ -117,4 +118,14 @@ test("the home Skills carousel replaces Next.js and Power BI with PostgreSQL onl
   assert.equal(detailedStack.includes("Next.js"), true)
   assert.equal(detailedStack.includes("Power BI"), true)
   assert.equal(detailedStack.includes("PostgreSQL"), false)
+})
+
+test("the PostgreSQL carousel card uses its dedicated Slonik icon", () => {
+  const carouselSource = readFileSync(
+    new URL("../components/StackCarousel.tsx", import.meta.url),
+    "utf8",
+  )
+
+  assert.match(carouselSource, /const PostgreSqlIcon/)
+  assert.match(carouselSource, /POSTGRESQL:\s*PostgreSqlIcon/)
 })
