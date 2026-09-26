@@ -4,7 +4,7 @@
 
 ## Visão operacional
 
-O portfólio pessoal bilíngue está no repositório independente `Darkzin41/ariel-rabelo-portfolio`. As correções atuais estão isoladas na branch `codex/navbar-scroll-skills`, no worktree `ariel-rabelo-portfolio-nav-worktree`; o `main` permanece intacto até a integração.
+O portfólio pessoal bilíngue está no repositório independente `Darkzin41/ariel-rabelo-portfolio`. As alterações foram integradas e sincronizadas no `main`; a branch `codex/navbar-scroll-skills` e o worktree `ariel-rabelo-portfolio-nav-worktree` permanecem preservados para recuperação.
 
 ## Resultado atual
 
@@ -14,12 +14,13 @@ O portfólio pessoal bilíngue está no repositório independente `Darkzin41/ari
 - Navbar por direção, item ativo sincronizado, rota `/projects` direta e reset instantâneo no topo.
 - Carrossel Habilidades da home com PostgreSQL, sem Next.js ou Power BI; dados detalhados preservados.
 - Repositório público: `Darkzin41/ariel-rabelo-portfolio`.
-- Nenhum deploy previsto nesta rodada.
+- Produção: `https://ariel-rabelo-portfolio.vercel.app`, publicada pela integração GitHub/Vercel.
+- Fallback de SPA ativo para acesso direto e recarga nas rotas públicas.
 
 ## Verificação
 
-TypeScript, 20 testes, build, specs, auditoria de produção, revisão manual responsiva e console limpo compõem o gate final descrito em `../specs/testing.md`.
+TypeScript, 22 testes, build, specs, auditoria de produção, deployment concluído e respostas `200` em `/`, `/projects` e `/stack` compõem o gate final descrito em `../specs/testing.md`.
 
 ## Handoff
 
-Integrar somente no repositório pessoal após o gate final. Preservar a branch e o worktree até a sincronização; o repositório acadêmico não deve receber esta branch.
+Não há ação pendente nesta entrega. Preservar a branch e o worktree para recuperação; o repositório acadêmico não deve receber esta branch.

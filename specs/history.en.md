@@ -2,6 +2,13 @@
 
 [Português](history.md) | [English](history.en.md)
 
+## 2026-09-25 — repository synchronized and Vercel production
+
+- The personal repository's `main` branch was synchronized with GitHub.
+- The GitHub/Vercel integration published the portfolio at `ariel-rabelo-portfolio.vercel.app`.
+- The SPA fallback now preserves direct access and reloads for `/projects`, project details, and `/stack`.
+- Twenty-two tests, TypeScript, build, specs, and audit passed; Home, Projects, and Stack returned `200` in production.
+
 ## 2026-09-25 — direction-aware navigation and refined Skills
 
 - The Navbar now hides while scrolling down and returns while scrolling up, remaining visible during interactive menus.

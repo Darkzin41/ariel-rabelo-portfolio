@@ -1,6 +1,6 @@
 ---
 id: CHG-20260925-vercel-production
-status: implemented
+status: verified
 date: 2026-09-25
 affected_capabilities: core
 ---
